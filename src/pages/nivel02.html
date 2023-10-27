@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enigma Hacker - Level 02</title>
+
+    <link rel="shortcut icon" href="../img/logo.png" type="image/x-icon">
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300&display=swap');
+
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: black;
+            font-family: "Fira Code", monospace;
+            color: #009919;
+        }
+
+        .enigma {
+            text-align: center;
+            background-color: #000000;
+            padding: 20px;
+            border: 2px solid #00FF00;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            max-width: 400px;
+            width: 80%;
+        }
+
+        h1 {
+            font-size: 24px;
+            margin: 0;
+            padding: 10px 0;
+        }
+
+        h3 {
+            font-size: 18px;
+            margin: 0;
+        }
+
+        p #palavraEmbaralhada {
+            font-size: 30pt;
+            margin: 20px 0;
+            font-weight: bold;
+            color: #00FF00;
+            text-shadow: 2px 2px 4px #000000;
+        }
+
+        p #dica {
+            font-size: 18px;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            margin: 10px;
+            font-size: 16px;
+            width: 90%;
+            border: 2px solid #00FF00;
+            border-radius: 5px;
+            text-align: center;
+
+            background-color: #000000;
+            color: #fff;
+
+            margin-bottom: 30px;
+        }
+
+        button {
+            background-color: #000000;
+            color: #009919;
+            border: 2px solid #00FF00;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 20px;
+            padding: 10px 20px;
+            width: 100%;
+            transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px #00FF00;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="enigma">
+        <h1>Desafio 02</h1>
+        <h3>Descubra a palavra que está embaralhada abaixo:</h3>
+        <p id="palavraEmbaralhada"></p>
+
+        <input type="text" id="resposta">
+        <button id="verificar">Verificar</button>
+
+        <p id="palavraDica"></p>
+    </div>
+
+    <script>
+        const palavraEmbaralhada = document.getElementById("palavraEmbaralhada");
+        const palavraDica = document.getElementById("palavraDica");
+        const respostaInput = document.getElementById("resposta");
+        const verificarButton = document.getElementById("verificar");
+
+        const possiveisPalavras = [
+            "COMPUTADOR",
+            "MOUSE",
+            "TECLADO",
+            "INTEL",
+            "MONITOR",
+            "TECLAS",
+            "GABINETE"
+        ]
+
+        function rand(opcoes) {
+            return (opcoes[~~(opcoes.length * Math.random())]);
+        }
+
+        let palavraEscolhida = rand(possiveisPalavras);
+
+        var dicaPalavra;
+
+        if (palavraEscolhida == possiveisPalavras[0]) {
+            dicaPalavra = "Uma máquina que processa informações..."
+
+        } else if (palavraEscolhida == possiveisPalavras[1]) {
+            dicaPalavra = "Um dispositivo utilizado para apontar e interagir com a tela do computador..."
+
+        } else if (palavraEscolhida == possiveisPalavras[3]) {
+            dicaPalavra = "Marca que desenvolve processadores..."
+
+        } else if (palavraEscolhida == possiveisPalavras[2]) {
+            dicaPalavra = "Um conjunto de botões que permite a entrada de texto e comandos em um computador..."
+
+        } else if (palavraEscolhida == possiveisPalavras[4]) {
+            dicaPalavra = "Está na sua frente..."
+
+        } else if (palavraEscolhida == possiveisPalavras[5]) {
+            dicaPalavra = "Faz parte do teclado..."
+
+        } else if (palavraEscolhida == possiveisPalavras[6]) {
+            dicaPalavra = "Onde convivem as peças do computador..."
+
+        }
+
+        const respostaCorreta = palavraEscolhida;
+
+        function embaralharPalavra(palavra) {
+            const arrayPalavra = palavra.split("");
+            for (let i = arrayPalavra.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [arrayPalavra[i], arrayPalavra[j]] = [arrayPalavra[j], arrayPalavra[i]];
+            }
+            return arrayPalavra.join("");
+        }
+
+        palavraEmbaralhada.textContent = embaralharPalavra(respostaCorreta);
+
+        var tentativa = 1;
+
+        verificarButton.addEventListener("click", function () {
+            const respostaUsuario = respostaInput.value.toUpperCase();
+            if (respostaUsuario === respostaCorreta) {
+                window.alert("[ ⚠ ATENÇÃO ] Resposta correta, você resolveu 2/5 desafios, guarde em sua memória este número '8' para utilizá-lo no final do enigma! Clique em 'Ok' para avançar");
+                window.location.href = './nivel03';
+            } else {
+                if (tentativa > 1) {
+                    palavraDica.textContent = `Dica: ${dicaPalavra}`
+                }
+
+                if (tentativa < 3) {
+                    window.alert(`❌ Você digitou a resposta incorreta, essa foi sua ${tentativa}/3 tentativas! Cuidado, ao perder você volta ao começo!`);
+                    tentativa++; // Incrementar a variável tentativa
+                } else {
+                    window.alert("🔄 Você atingiu 3 erros! Portanto, você retornou ao começo!");
+                    window.location.href = '../../index';
+                }
+                respostaInput.value = "";
+            }
+        });
+
+    </script>
+
+    <script src="../js/bloquearCoisas.js"></script>
+</body>
+
+</html>

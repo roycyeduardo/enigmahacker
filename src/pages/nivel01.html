@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Enigma Hack - Level 01</title>
+
+        <link rel="shortcut icon" href="../img/logo.png" type="image/x-icon">
+
+        <style>
+            body {
+                margin: 0;
+                padding: 0;
+                height: 100vh;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background: black;
+                font-family: "Fira Code", monospace;
+                color: #009919;
+            }
+
+            #principal {
+                border: 2px solid #00FF00;
+                border-radius: 10px;
+                width: 1100px;
+                height: 700px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                background: #000000;
+                padding: 20px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            }
+
+            #jogoHacker {
+                border: 2px solid #00FF00;
+                border-radius: 10px;
+                width: 800px;
+                height: 500px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                background: #000000;
+                padding: 20px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+                -webkit-user-drag: none;
+                user-select: none;
+                -webkit-user-drag: none;
+                -moz-user-select: none;
+                -webkit-user-select: none;
+                -ms-user-select: none;
+            }
+
+            #hackers img {
+                width: 80px;
+            }
+
+            #pontuacao,
+            #tempoRestante {
+                font-size: 24px;
+                color: #00FF00;
+                margin: 10px 0;
+            }
+
+            #tempoRestante {
+                font-size: 18px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="principal">
+            <h1>Desafio 01</h1>
+            <h3>Oh não, outro hacker irá te atrapalhar neste enigma, clique nele <b>12</b> vezes para impedir ele!</h3>
+
+            <div id="jogoHacker">
+                <div id="hackers"><img src="../img/hacker.png"></div>
+            </div>
+
+            <div id="pontuacao"></div>
+            <div id="tempoRestante"></div>
+        </div>
+
+        <script>
+            const hackers = document.getElementById('hackers');
+            const pontuacao = document.getElementById('pontuacao');
+            const tempoRestante = document.getElementById('tempoRestante');
+
+            let pontos = 0;
+            let tempo = 15;
+            let hackersClicados = 0;
+
+            function atualizarPontuacao() {
+                pontuacao.textContent = `Pontuação: ${pontos}`;
+            }
+
+            function atualizarTempo() {
+                tempoRestante.textContent = `Tempo Restante: ${tempo}s`;
+            }
+
+            function gerarPosicaoAleatoria() {
+                const jogoHacker = document.getElementById('jogoHacker');
+                const hacker = document.getElementById('hackers');
+
+                const maxWidth = jogoHacker.clientWidth - hacker.clientWidth;
+                const maxHeight = jogoHacker.clientHeight - hacker.clientHeight;
+
+                const novoX = Math.random() * maxWidth / 2;
+                const novoY = Math.random() * maxHeight / 2;
+
+                hacker.style.transform = `translate(${novoX}px, ${novoY}px)`;
+            }
+
+
+            function clicarNohackers() {
+                pontos++;
+                atualizarPontuacao();
+                hackersClicados++;
+
+                if (hackersClicados > 11) {
+                    window.alert("[ ⚠ ATENÇÃO ] Você parou o ataque hacker, agora você ja pode prosseguir, você resolveu 1/5 desafios, guarde em sua memória este número '7' para utilizá-lo no final do enigma! Clique em 'Ok' para avançar...");
+                    window.location.href = './nivel02';
+                }
+            }
+
+            function iniciarGeracaoDePosicaoAleatoria() {
+                gerarPosicaoAleatoria();
+
+                setInterval(gerarPosicaoAleatoria, 720);
+            }
+
+            hackers.addEventListener('click', clicarNohackers);
+
+            function iniciarContagemRegressiva() {
+                const contador = setInterval(() => {
+                    tempo--;
+                    atualizarTempo();
+
+                    if (tempo === 0) {
+                        clearInterval(contador);
+                        window.alert(`⏰ O tempo acabou e você fez somente '${pontos}/12' pontos! Tente novamente, clique em 'Ok' para reiniciar...`);
+                        location.reload()
+                    }
+                }, 1000);
+            }
+
+            iniciarGeracaoDePosicaoAleatoria();
+            atualizarPontuacao();
+            atualizarTempo();
+            iniciarContagemRegressiva();
+
+            console.log(document.cookie)
+        </script>
+
+        <script src="../js/bloquearCoisas.js"></script>
+    </body>
+</html>

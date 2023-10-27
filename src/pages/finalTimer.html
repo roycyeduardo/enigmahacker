@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enigma Final (Timer)</title>
+
+    <link rel="shortcut icon" href="../img/logo.png" type="image/x-icon">
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family:Fira+Code:wght@300&display=swap');
+    
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: black;
+            overflow: hidden;
+        }
+    
+        #fundo_timer {
+            background-color: #000000;
+            width: 80%;
+            max-width: 700px;
+            border-radius: 25px;
+            text-align: center;
+            padding: 40px;
+            margin-bottom: 40px;
+            text-shadow: 0 0 10px #ff0000;
+            box-shadow: 0 0 20px #ff0000;
+        }
+    
+        #timer {
+            font-family: 'Fira Code', monospace;
+            font-weight: bold;
+            color: red;
+            font-size: 80px;
+            margin: 0;
+        }
+    
+        #aviso {
+            font-family: 'Fira Code', monospace;
+            text-align: center;
+            background-color: #000000;
+            color: #ff0000;
+            border: 2px solid #ff0000;
+            border-radius: 20px;
+            width: 100%;
+            max-width: 700px;
+            max-height: 280px;
+            text-shadow: 0 0 10px #ff0000;
+            box-shadow: 0 0 20px #ff0000;
+            margin-bottom: 40px;
+        }
+    
+        #reiniciarJogo {
+            font-family: 'Fira Code', monospace;
+            text-align: center;
+            background-color: #000000;
+            color: #ff0000;
+            border: 2px solid #ff0000;
+            border-radius: 20px;
+            width: 100%;
+            max-width: 300px;
+            height: 40px;
+            text-shadow: 0 0 10px #000000;
+            box-shadow: 0 0 20px #ff0000;
+            margin-bottom: 40px;
+            padding: 20px;
+            cursor: pointer;
+            font-size: 20px;
+            line-height: 5px;
+        }
+    
+        #qrcodes {
+            display: flex;
+            justify-content: space-around;
+            max-width: 700px;
+            margin-top: 40px;
+        }
+    
+        #etecvestibular,
+        #feedback {
+            text-align: center;
+            margin: 20px;
+            text-shadow: 0 0 10px #000000;
+            box-shadow: 0 0 20px #ff0000;
+            font-family: 'Fira Code', monospace;
+            text-align: center;
+            background-color: #000000;
+            color: #ff0000;
+            border: 2px solid #ff0000;
+            padding: 30px;
+            border-radius: 20px;
+        }
+    
+        #etecvestibular img,
+        #feedback img {
+            max-width: 200px;
+            height: auto;
+        }
+    
+        button:hover {
+            transform: scale(1.05);
+        }
+    </style>    
+</head>
+<body>
+    <div id="fundo_timer">
+        <p id="timer">00:00:00</p>
+    </div>
+    
+    <button id="reiniciarJogo" onclick="location.href = '../../index'">Reiniciar</button>
+
+    <div id="aviso">
+        <h1>Aviso!</h1>
+        <h3>Mostre o tempo gasto para um representante para talvez ganhar algo!</h3>
+    </div>
+
+    <div id="qrcodes">
+        <div id="etecvestibular">
+            <img src="../img/qr_vestibulinhoetec_red.png" alt="QR code do vestibulinho da etec">
+            <h3>Inscrições abertas (ETEC)</h3>
+        </div>
+
+        <div id="feedback">
+            <img src="../img/qr_feedback_red.png" alt="QR code para dar feedback ao laboratório">
+            <h3>De um feedback</h3>
+        </div>
+    </div>
+
+    <script>
+        const startTime = parseInt(getCookie("startTime"), 10) || 0;
+        clearInterval(timer);
+
+        const currentTime = new Date().getTime();
+        const elapsedTime = new Date(currentTime - startTime);
+
+        const hours = String(elapsedTime.getUTCHours()).padStart(2, '0');
+        const minutes = String(elapsedTime.getUTCMinutes()).padStart(2, '0');
+        const seconds = String(elapsedTime.getUTCSeconds()).padStart(2, '0');
+
+        document.getElementById("timer").innerHTML = `${hours}:${minutes}:${seconds}`;
+
+        function getCookie(name) {
+            const value = `; ${document.cookie}`;
+            const parts = value.split(`; ${name}=`);
+            if (parts.length === 2) return parts.pop().split(';').shift();
+        }
+    </script>
+
+    <script src="../js/bloquearCoisas.js"></script>
+</body>
+</html>

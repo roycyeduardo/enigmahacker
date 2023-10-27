@@ -1,0 +1,34 @@
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./src/css/estilo01.css">
+    <title>Enigma Hacker</title>
+
+    <link rel="shortcut icon" href="./src/img/logo.png" type="image/x-icon">
+</head>
+<body>
+	<canvas id="Matrix"></canvas>
+
+	<button id="iniciarJogo" onclick="location.href = './src/pages/nivel01'">Iniciar</button>
+
+    <div id="aviso">
+        <h1>Aviso!</h1>
+        <h3>Preste atenção em TODOS os detalhes!</h3>
+    </div>
+
+    <script>
+        document.getElementById("iniciarJogo").addEventListener("click", () => {
+            const startTime = new Date().getTime();
+            document.cookie = `startTime=${startTime}`;
+        });
+
+        console.log(document.cookie)
+    </script>
+
+    <script src="./src/js/matrix.js"></script>
+
+    <script src="./src/js/bloquearCoisas.js"></script>
+</body>
+</html>

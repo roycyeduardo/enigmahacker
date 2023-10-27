@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enigma Hacker - Level 05</title>
+
+    <link rel="shortcut icon" href="../img/logo.png" type="image/x-icon">
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300&display=swap');
+
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: black;
+            font-family: "Fira Code", monospace;
+            color: #009919;
+        }
+
+        .enigma {
+            text-align: center;
+            background-color: #000000;
+            padding: 20px;
+            border: 2px solid #00FF00;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            max-width: 400px;
+            width: 80%;
+        }
+
+        h1 {
+            font-size: 24px;
+            margin: 0;
+            padding: 10px 0;
+        }
+
+        h3 {
+            font-size: 18px;
+            margin: 0;
+        }
+
+        p #palavraEmbaralhada {
+            font-size: 30pt;
+            margin: 20px 0;
+            font-weight: bold;
+            color: #00FF00;
+            text-shadow: 2px 2px 4px #000000;
+        }
+
+        p #dica {
+            font-size: 18px;
+        }
+
+        .input-group {
+            display: flex;
+            align-items: center;
+        }
+
+        input[id="resposta"], input[id="codCompleto"]{
+            padding: 10px;
+            margin: 10px;
+            font-size: 16px;
+            width: 80%; /* Divida o espaço igualmente entre os campos */
+            border: 2px solid #00FF00;
+            border-radius: 5px;
+            text-align: center;
+            background-color: #000000;
+            color: #fff;
+        }
+        ::-webkit-input-placeholder {
+            color: #0099199d;
+        }
+        input[id="codCompleto"] {
+            width: 48%;
+        }
+
+        button {
+            background-color: #000000;
+            color: #009919;
+            border: 2px solid #00FF00;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 20px;
+            padding: 10px 20px;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px #00FF00;
+        }
+
+        fieldset {
+            background-color: #000000;
+            padding: 20px;
+            border: 2px solid #00FF00;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            margin-right: 5%;
+        }
+
+        span[id="linha"] {
+            color: white;
+        }
+        span[id="coluna"] {
+            color: #afafaf;
+        }
+    </style>
+</head>
+
+<body>
+    <fieldset>
+        <legend><b>Tabela da cifra de Vigenere</b></legend>
+        <ul>
+            <li><span id="linha">[ 00 ]</span> <span id="coluna">A B C D E F G H I J K L M N O P Q R S T U V W X Y Z</span></li>
+            <li><span id="linha">[ 01 ]</span> B C D E F G H I J K L M N O P Q R S T U V W X Y Z A</li>
+            <li><span id="linha">[ 02 ]</span> C D E F G H I J K L M N O P Q R S T U V W X Y Z A B</li>
+            <li><span id="linha">[ 03 ]</span> D E F G H I J K L M N O P Q R S T U V W X Y Z A B C</li>
+            <li><span id="linha">[ 04 ]</span> E F G H I J K L M N O P Q R S T U V W X Y Z A B C D</li>
+            <li><span id="linha">[ 05 ]</span> F G H I J K L M N O P Q R S T U V W X Y Z A B C D E</li>
+            <li><span id="linha">[ 06 ]</span> G H I J K L M N O P Q R S T U V W X Y Z A B C D E F</li>
+            <li><span id="linha">[ 07 ]</span> H I J K L M N O P Q R S T U V W X Y Z A B C D E F G</li>
+            <li><span id="linha">[ 08 ]</span> I J K L M N O P Q R S T U V W X Y Z A B C D E F G H</li>
+            <li><span id="linha">[ 09 ]</span> J K L M N O P Q R S T U V W X Y Z A B C D E F G H I</li>
+            <li><span id="linha">[ 10 ]</span> K L M N O P Q R S T U V W X Y Z A B C D E F G H I J</li>
+            <li><span id="linha">[ 11 ]</span> L M N O P Q R S T U V W X Y Z A B C D E F G H I J K</li>
+            <li><span id="linha">[ 12 ]</span> M N O P Q R S T U V W X Y Z A B C D E F G H I J K L</li>
+            <li><span id="linha">[ 13 ]</span> N O P Q R S T U V W X Y Z A B C D E F G H I J K L M</li>
+            <li><span id="linha">[ 14 ]</span> O P Q R S T U V W X Y Z A B C D E F G H I J K L M N</li>
+            <li><span id="linha">[ 15 ]</span> P Q R S T U V W X Y Z A B C D E F G H I J K L M N O</li>
+            <li><span id="linha">[ 16 ]</span> Q R S T U V W X Y Z A B C D E F G H I J K L M N O P</li>
+            <li><span id="linha">[ 17 ]</span> R S T U V W X Y Z A B C D E F G H I J K L M N O P Q</li>
+            <li><span id="linha">[ 18 ]</span> S T U V W X Y Z A B C D E F G H I J K L M N O P Q R</li>
+            <li><span id="linha">[ 19 ]</span> T U V W X Y Z A B C D E F G H I J K L M N O P Q R S</li>
+            <li><span id="linha">[ 20 ]</span> U V W X Y Z A B C D E F G H I J K L M N O P Q R S T</li>
+            <li><span id="linha">[ 21 ]</span> V W X Y Z A B C D E F G H I J K L M N O P Q R S T U</li>
+            <li><span id="linha">[ 22 ]</span> W X Y Z A B C D E F G H I J K L M N O P Q R S T U V</li>
+            <li><span id="linha">[ 23 ]</span> X Y Z A B C D E F G H I J K L M N O P Q R S T U V W</li>
+            <li><span id="linha">[ 24 ]</span> Y Z A B C D E F G H I J K L M N O P Q R S T U V W X</li>
+            <li><span id="linha">[ 25 ]</span> Z A B C D E F G H I J K L M N O P Q R S T U V W X Y</li>
+            <li><span id="linha">[ 26 ]</span> A B C D E F G H I J K L M N O P Q R S T U V W X Y Z</li>
+        </ul>
+    </fieldset>
+
+    <div class="enigma">
+        <h1>Desafio Final</h1>
+        <h3>Decifre o código de Vigenere</h3>
+        <p id="codigo"></p>
+
+        <input type="password" id="resposta" placeholder="Palavra decifrada...">
+        <input id="codCompleto" type="password" size="4" maxlength="4" placeholder="Codigo de acesso..."> <button id="verificar">Verificar</button>
+    </div>
+
+    <script>
+        const respostaInput = document.getElementById("resposta");
+        const verificarButton = document.getElementById("verificar");
+        const codigoVig = document.getElementById("codigo");
+
+        codigoVig.textContent = "1D8L3B5X";
+
+        const codigoRes = "ETEC"
+
+        const codigoAcesso = "7875"
+
+        var tentativa = 1;
+
+        verificarButton.addEventListener("click", function () {
+            const respostaUsuario = respostaInput.value.toUpperCase();
+
+            const codigoForm = document.getElementById("codCompleto").value
+            if (!codigoForm || codigoForm == null || codigoForm !== "7875") {
+                if (tentativa < 3) {
+                    if (tentativa > 1) {
+                        codigoVig.innerHTML = "<span id='linha'>1</span><span id='coluna'>D</span><span id='linha'>8</span><span id='coluna'>L</span><span id='linha'>3</span><span id='coluna'>B</span><span id='linha'>5</span><span id='coluna'>X</span>"
+                    }
+
+                    window.alert(`❌ Você digitou o código de acesso incorreto, essa foi sua ${tentativa}/3 tentativas! Cuidado, ao perder você volta ao começo!`);
+                    tentativa++;
+                } else {
+                    window.alert("🔄 Você atingiu 3 erros! Portanto, você retornou ao começo!");
+                    window.location.href = '../../index';
+                }
+            } else {
+                if (respostaUsuario === codigoRes) {
+                    window.location.href = './finalVideo';
+                } else {
+                    if (tentativa < 3) {
+                        window.alert(`❌ Você digitou a palavra incorreta, essa foi sua ${tentativa}/3 tentativas! Cuidado, ao perder você volta ao começo!`);
+                        tentativa++;
+                    } else {
+                        window.alert("🔄 Você atingiu 3 erros! Portanto, você retornou ao começo!");
+                        window.location.href = '../../index';
+                    }
+                    respostaInput.value = "";
+                }
+            }
+    });
+
+    </script>
+
+    <script src="../js/bloquearCoisas.js"></script>
+</body>
+
+</html>

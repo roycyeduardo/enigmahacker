@@ -82,74 +82,7 @@
         </div>
 
         <script>
-            const hackers = document.getElementById('hackers');
-            const pontuacao = document.getElementById('pontuacao');
-            const tempoRestante = document.getElementById('tempoRestante');
-
-            let pontos = 0;
-            let tempo = 15;
-            let hackersClicados = 0;
-
-            function atualizarPontuacao() {
-                pontuacao.textContent = `Pontuação: ${pontos}`;
-            }
-
-            function atualizarTempo() {
-                tempoRestante.textContent = `Tempo Restante: ${tempo}s`;
-            }
-
-            function gerarPosicaoAleatoria() {
-                const jogoHacker = document.getElementById('jogoHacker');
-                const hacker = document.getElementById('hackers');
-
-                const maxWidth = jogoHacker.clientWidth - hacker.clientWidth;
-                const maxHeight = jogoHacker.clientHeight - hacker.clientHeight;
-
-                const novoX = Math.random() * maxWidth / 2;
-                const novoY = Math.random() * maxHeight / 2;
-
-                hacker.style.transform = `translate(${novoX}px, ${novoY}px)`;
-            }
-
-
-            function clicarNohackers() {
-                pontos++;
-                atualizarPontuacao();
-                hackersClicados++;
-
-                if (hackersClicados > 11) {
-                    window.alert("[ ⚠ ATENÇÃO ] Você parou o ataque hacker, agora você ja pode prosseguir, você resolveu 1/5 desafios, guarde em sua memória este número '7' para utilizá-lo no final do enigma! Clique em 'Ok' para avançar...");
-                    window.location.href = './nivel02';
-                }
-            }
-
-            function iniciarGeracaoDePosicaoAleatoria() {
-                gerarPosicaoAleatoria();
-
-                setInterval(gerarPosicaoAleatoria, 720);
-            }
-
-            hackers.addEventListener('click', clicarNohackers);
-
-            function iniciarContagemRegressiva() {
-                const contador = setInterval(() => {
-                    tempo--;
-                    atualizarTempo();
-
-                    if (tempo === 0) {
-                        clearInterval(contador);
-                        window.alert(`⏰ O tempo acabou e você fez somente '${pontos}/12' pontos! Tente novamente, clique em 'Ok' para reiniciar...`);
-                        location.reload()
-                    }
-                }, 1000);
-            }
-
-            iniciarGeracaoDePosicaoAleatoria();
-            atualizarPontuacao();
-            atualizarTempo();
-            iniciarContagemRegressiva();
-
-            console.log(document.cookie)
+            const hackers=document.getElementById("hackers"),pontuacao=document.getElementById("pontuacao"),tempoRestante=document.getElementById("tempoRestante");let pontos=0,tempo=15,hackersClicados=0;function atualizarPontuacao(){pontuacao.textContent=`Pontua\xe7\xe3o: ${pontos}`}function atualizarTempo(){tempoRestante.textContent=`Tempo Restante: ${tempo}s`}function gerarPosicaoAleatoria(){let a=document.getElementById("jogoHacker"),e=document.getElementById("hackers"),o=a.clientWidth-e.clientWidth,t=a.clientHeight-e.clientHeight;e.style.transform=`translate(${Math.random()*o/2}px, ${Math.random()*t/2}px)`}function clicarNohackers(){pontos++,atualizarPontuacao(),++hackersClicados>11&&(window.alert("[ ⚠ ATEN\xc7\xc3O ] Voc\xea parou o ataque hacker, agora voc\xea ja pode prosseguir, voc\xea resolveu 1/5 desafios, guarde em sua mem\xf3ria este n\xfamero '7' para utiliz\xe1-lo no final do enigma! Clique em 'Ok' para avan\xe7ar..."),window.location.href="./nivel02")}function iniciarGeracaoDePosicaoAleatoria(){gerarPosicaoAleatoria(),setInterval(gerarPosicaoAleatoria,720)}function iniciarContagemRegressiva(){let a=setInterval(()=>{tempo--,atualizarTempo(),0===tempo&&(clearInterval(a),window.alert(`⏰ O tempo acabou e voc\xea fez somente '${pontos}/12' pontos! Tente novamente, clique em 'Ok' para reiniciar...`),location.reload())},1e3)}hackers.addEventListener("click",clicarNohackers),iniciarGeracaoDePosicaoAleatoria(),atualizarPontuacao(),atualizarTempo(),iniciarContagemRegressiva(),console.log(document.cookie);
         </script>
 
         <script src="../js/bloquearCoisas.js"></script>

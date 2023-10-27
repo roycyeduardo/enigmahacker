@@ -139,64 +139,7 @@
     </div>
 
     <script>
-        const codigoMorse = document.getElementById("codigoMorse");
-        const respostaInput = document.getElementById("resposta");
-        const verificarButton = document.getElementById("verificar");
-
-        cursosMorse = [
-            ".-ㅤㅤ-..ㅤㅤ--ㅤㅤ..ㅤㅤ-.ㅤㅤ..ㅤㅤ...ㅤㅤ-ㅤㅤ.-.ㅤㅤ.-ㅤㅤ-.-.ㅤㅤ.-ㅤㅤ---", // Administracao
-            "..ㅤㅤ-.ㅤㅤ..-.ㅤㅤ---ㅤㅤ.-.ㅤㅤ--ㅤㅤ.-ㅤㅤ-ㅤㅤ..ㅤㅤ-.-.ㅤㅤ.-", // Informatica
-            ".-ㅤㅤ.-..ㅤㅤ..ㅤㅤ--ㅤㅤ.ㅤㅤ-.ㅤㅤ-ㅤㅤ---ㅤㅤ...", // Alimentos
-            "--.-ㅤㅤ..-ㅤㅤ..ㅤㅤ--ㅤㅤ..ㅤㅤ-.-.ㅤㅤ.-", // Quimica
-            "--ㅤㅤ.ㅤㅤ-..ㅤㅤ..ㅤㅤ-.-.ㅤㅤ..ㅤㅤ-.ㅤㅤ.-", /// Medicina
-            ".-ㅤㅤ--.ㅤㅤ.-.ㅤㅤ---ㅤㅤ..ㅤㅤ-.ㅤㅤ-..ㅤㅤ..-ㅤㅤ...ㅤㅤ-ㅤㅤ.-.ㅤㅤ..ㅤㅤ.-" // Agroindustria
-        ]
-
-        function rand(codigos) {
-            return (codigos[~~(codigos.length * Math.random())]);
-        }
-
-        let codMorse_Escolha = rand(cursosMorse);
-
-        codigoMorse.textContent = codMorse_Escolha;
-
-        var traducaoCod;
-
-        if (codMorse_Escolha == cursosMorse[0]) {
-            traducaoCod = "ADMINISTRACAO"
-        } else if (codMorse_Escolha == cursosMorse[1]) {
-            traducaoCod = "INFORMATICA"
-        } else if (codMorse_Escolha == cursosMorse[2]) {
-            traducaoCod = "ALIMENTOS"
-        } else if (codMorse_Escolha == cursosMorse[3]) {
-            traducaoCod = "QUIMICA"
-        } else if (codMorse_Escolha == cursosMorse[4]) {
-            traducaoCod = "MEDICINA"
-        } else if (codMorse_Escolha == cursosMorse[5]) {
-            traducaoCod = "AGROINDUSTRIA"
-        }
-
-        var tentativa = 1;
-
-        verificarButton.addEventListener("click", function () {
-            const respostaUsuario = respostaInput.value.toUpperCase();
-            if (respostaUsuario === traducaoCod) {
-                window.alert("[ ⚠ ATENÇÃO ] Resposta correta, você resolveu 3/5 desafios, guarde em sua memória este número '7' para utilizá-lo no final do enigma! Clique em 'Ok' para avançar");
-                window.location.href = './nivel04';
-            } else {
-                if (tentativa < 3) {
-                    window.alert(`❌ Você digitou a resposta incorreta, essa foi sua ${tentativa}/3 tentativas! Cuidado, ao perder você volta ao começo!`);
-                    tentativa++; // Incrementar a variável tentativa
-                } else {
-                    window.alert("🔄 Você atingiu 3 erros! Portanto, você retornou ao começo!");
-                    window.location.href = '../../index';
-                }
-                respostaInput.value = "";
-            }
-    });
-
-    console.log(document.cookie)
-
+        const codigoMorse=document.getElementById("codigoMorse"),respostaInput=document.getElementById("resposta"),verificarButton=document.getElementById("verificar");function rand(o){return o[~~(o.length*Math.random())]}cursosMorse=[".-ㅤㅤ-..ㅤㅤ--ㅤㅤ..ㅤㅤ-.ㅤㅤ..ㅤㅤ...ㅤㅤ-ㅤㅤ.-.ㅤㅤ.-ㅤㅤ-.-.ㅤㅤ.-ㅤㅤ---","..ㅤㅤ-.ㅤㅤ..-.ㅤㅤ---ㅤㅤ.-.ㅤㅤ--ㅤㅤ.-ㅤㅤ-ㅤㅤ..ㅤㅤ-.-.ㅤㅤ.-",".-ㅤㅤ.-..ㅤㅤ..ㅤㅤ--ㅤㅤ.ㅤㅤ-.ㅤㅤ-ㅤㅤ---ㅤㅤ...","--.-ㅤㅤ..-ㅤㅤ..ㅤㅤ--ㅤㅤ..ㅤㅤ-.-.ㅤㅤ.-","--ㅤㅤ.ㅤㅤ-..ㅤㅤ..ㅤㅤ-.-.ㅤㅤ..ㅤㅤ-.ㅤㅤ.-",".-ㅤㅤ--.ㅤㅤ.-.ㅤㅤ---ㅤㅤ..ㅤㅤ-.ㅤㅤ-..ㅤㅤ..-ㅤㅤ...ㅤㅤ-ㅤㅤ.-.ㅤㅤ..ㅤㅤ.-"];let codMorse_Escolha=rand(cursosMorse);codigoMorse.textContent=codMorse_Escolha,codMorse_Escolha==cursosMorse[0]?traducaoCod="ADMINISTRACAO":codMorse_Escolha==cursosMorse[1]?traducaoCod="INFORMATICA":codMorse_Escolha==cursosMorse[2]?traducaoCod="ALIMENTOS":codMorse_Escolha==cursosMorse[3]?traducaoCod="QUIMICA":codMorse_Escolha==cursosMorse[4]?traducaoCod="MEDICINA":codMorse_Escolha==cursosMorse[5]&&(traducaoCod="AGROINDUSTRIA");var traducaoCod,tentativa=1;verificarButton.addEventListener("click",function(){let o=respostaInput.value.toUpperCase();o===traducaoCod?(window.alert("[ ⚠ ATEN\xc7\xc3O ] Resposta correta, voc\xea resolveu 3/5 desafios, guarde em sua mem\xf3ria este n\xfamero '7' para utiliz\xe1-lo no final do enigma! Clique em 'Ok' para avan\xe7ar"),window.location.href="./nivel04"):(tentativa<3?(window.alert(`❌ Voc\xea digitou a resposta incorreta, essa foi sua ${tentativa}/3 tentativas! Cuidado, ao perder voc\xea volta ao come\xe7o!`),tentativa++):(window.alert("\uD83D\uDD04 Voc\xea atingiu 3 erros! Portanto, voc\xea retornou ao come\xe7o!"),window.location.href="../../index"),respostaInput.value="")}),console.log(document.cookie);
     </script>
 
     <script src="../js/bloquearCoisas.js"></script>

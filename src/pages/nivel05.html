@@ -157,50 +157,7 @@
     </div>
 
     <script>
-        const respostaInput = document.getElementById("resposta");
-        const verificarButton = document.getElementById("verificar");
-        const codigoVig = document.getElementById("codigo");
-
-        codigoVig.textContent = "1D8L3B5X";
-
-        const codigoRes = "ETEC"
-
-        const codigoAcesso = "7875"
-
-        var tentativa = 1;
-
-        verificarButton.addEventListener("click", function () {
-            const respostaUsuario = respostaInput.value.toUpperCase();
-
-            const codigoForm = document.getElementById("codCompleto").value
-            if (!codigoForm || codigoForm == null || codigoForm !== "7875") {
-                if (tentativa < 3) {
-                    if (tentativa > 1) {
-                        codigoVig.innerHTML = "<span id='linha'>1</span><span id='coluna'>D</span><span id='linha'>8</span><span id='coluna'>L</span><span id='linha'>3</span><span id='coluna'>B</span><span id='linha'>5</span><span id='coluna'>X</span>"
-                    }
-
-                    window.alert(`❌ Você digitou o código de acesso incorreto, essa foi sua ${tentativa}/3 tentativas! Cuidado, ao perder você volta ao começo!`);
-                    tentativa++;
-                } else {
-                    window.alert("🔄 Você atingiu 3 erros! Portanto, você retornou ao começo!");
-                    window.location.href = '../../index';
-                }
-            } else {
-                if (respostaUsuario === codigoRes) {
-                    window.location.href = './finalVideo';
-                } else {
-                    if (tentativa < 3) {
-                        window.alert(`❌ Você digitou a palavra incorreta, essa foi sua ${tentativa}/3 tentativas! Cuidado, ao perder você volta ao começo!`);
-                        tentativa++;
-                    } else {
-                        window.alert("🔄 Você atingiu 3 erros! Portanto, você retornou ao começo!");
-                        window.location.href = '../../index';
-                    }
-                    respostaInput.value = "";
-                }
-            }
-    });
-
+        const respostaInput=document.getElementById("resposta"),verificarButton=document.getElementById("verificar"),codigoVig=document.getElementById("codigo");codigoVig.textContent="1D8L3B5X";const codigoRes="ETEC",codigoAcesso="7875";var tentativa=1;verificarButton.addEventListener("click",function(){let a=respostaInput.value.toUpperCase(),o=document.getElementById("codCompleto").value;o&&null!=o&&"7875"===o?"ETEC"===a?window.location.href="./finalVideo":(tentativa<3?(window.alert(`❌ Voc\xea digitou a palavra incorreta, essa foi sua ${tentativa}/3 tentativas! Cuidado, ao perder voc\xea volta ao come\xe7o!`),tentativa++):(window.alert("\uD83D\uDD04 Voc\xea atingiu 3 erros! Portanto, voc\xea retornou ao come\xe7o!"),window.location.href="../../index"),respostaInput.value=""):tentativa<3?(tentativa>1&&(codigoVig.innerHTML="<span id='linha'>1</span><span id='coluna'>D</span><span id='linha'>8</span><span id='coluna'>L</span><span id='linha'>3</span><span id='coluna'>B</span><span id='linha'>5</span><span id='coluna'>X</span>"),window.alert(`❌ Voc\xea digitou o c\xf3digo de acesso incorreto, essa foi sua ${tentativa}/3 tentativas! Cuidado, ao perder voc\xea volta ao come\xe7o!`),tentativa++):(window.alert("\uD83D\uDD04 Voc\xea atingiu 3 erros! Portanto, voc\xea retornou ao come\xe7o!"),window.location.href="../../index")});
     </script>
 
     <script src="../js/bloquearCoisas.js"></script>

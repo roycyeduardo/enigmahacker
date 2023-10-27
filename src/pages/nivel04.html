@@ -103,30 +103,7 @@
     </div>
 
     <script>
-        const respostaInput = document.getElementById("resposta");
-        const verificarButton = document.getElementById("verificar");
-
-        const respostaCorreta = "404";
-        
-        var tentativa = 1;
-
-        verificarButton.addEventListener("click", function () {
-            const respostaUsuario = respostaInput.value.toUpperCase();
-            if (respostaUsuario === respostaCorreta) {
-                window.alert("[ ⚠ ATENÇÃO ] Resposta correta, você resolveu 4/5 desafios, guarde em sua memória este número '5' para utilizá-lo no final do enigma! Clique em 'Ok' para avançar");
-                window.location.href = './nivel05';
-            } else {
-                if (tentativa < 3) {
-                    window.alert(`❌ Você digitou a resposta incorreta, essa foi sua ${tentativa}/3 tentativas! Cuidado, ao perder você volta ao começo!`);
-                    tentativa++;
-                } else {
-                    window.alert("🔄 Você atingiu 3 erros! Portanto, você retornou ao começo!");
-                    window.location.href = '../../index';
-                }
-                respostaInput.value = "";
-            }
-    });
-
+        const respostaInput=document.getElementById("resposta"),verificarButton=document.getElementById("verificar"),respostaCorreta="404";var tentativa=1;verificarButton.addEventListener("click",function(){let e=respostaInput.value.toUpperCase();"404"===e?(window.alert("[ ⚠ ATEN\xc7\xc3O ] Resposta correta, voc\xea resolveu 4/5 desafios, guarde em sua mem\xf3ria este n\xfamero '5' para utiliz\xe1-lo no final do enigma! Clique em 'Ok' para avan\xe7ar"),window.location.href="./nivel05"):(tentativa<3?(window.alert(`❌ Voc\xea digitou a resposta incorreta, essa foi sua ${tentativa}/3 tentativas! Cuidado, ao perder voc\xea volta ao come\xe7o!`),tentativa++):(window.alert("\uD83D\uDD04 Voc\xea atingiu 3 erros! Portanto, voc\xea retornou ao come\xe7o!"),window.location.href="../../index"),respostaInput.value="")});
     </script>
 
     <script src="../js/bloquearCoisas.js"></script>
